@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽獎系統</title>
+</head>
+<body>
+    <form>
+        <h3>抽獎系統</h3>
+        <input type="text" placeholder="輸入抽獎者信息" id="text"  >
+        <button id="confirmBtn" onclick="confirmBtn()" value="確定">確定</button>
+        <button id="drawBtn" onclick="drawWinner()" value="抽獎">抽獎</button>
+        <input type="text" id="winnerDisplay" placeholder="登愣得獎者出爐～～" value="">
+    </form>
+</body>
+</html>
+<button type="button" onclick="document.getElementById('date').innerHTML = Date()">
+    time date
+</button>
+<p id="date"></p>
+
+<script>
+    let entries = [];
+    let winner = "";
+
+    function btn(){
+        let entryText = document.getElementById('text').value;
+        if (entryText.trim() !== ""){
+            entries.push(entryText);
+            document.getElementById('text').value = "";
+        }
+    }
+
+    function drawWinner(){
+        if(entries.length > 0){
+            let randomIndex = Math.floor(Math.random() * entries.length);
+            winner = entries[randomIndex];
+            document.getElementById('winnerDisplay').value = winner;
+        }else{
+            alert ("請先輸入抽獎者資料");
+        }
+    }
+</script>

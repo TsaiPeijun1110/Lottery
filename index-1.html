@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .content{
+        width: 450px;
+        height: 450px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-between;
+        align-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .banner{
+        width: 500px;
+        height: 500px;
+        border: 8px solid blanchedalmond;
+        margin: auto;
+        position: relative;
+    }
+    .box{
+        width: 150px;
+        height: 150px;
+        background-size: cover;
+    }
+    .box1{
+        background-image: url('./img/box1.jpeg');
+    }
+    .box2{
+        background-image: url('./img/box2.jpeg');
+    }
+    .box3{
+        background-image: url('./img/box3.jpeg');
+    }
+    .box4{
+        background-image: url('./img/box4.jpeg');
+    }
+    .box5{
+        background-image: url('./img/box5.jpeg');
+    }
+    .box6{
+        background-image: url('./img/box6.jpeg');
+    }
+    .box7{
+        background-image: url('./img/box7.png');
+    }
+    .box8{
+        background-image: url('./img/box8.png');
+    }
+    .btn{
+        width: 150px;
+        height: 150px;
+        background-size: cover;
+        background-image: url('./img/box1.jpeg');
+    }
+    
+</style>
+</head>
+<body>
+    <div class="banner">
+    <div class="content">
+                <div class="box box1"></div>
+                <div class="box box2"></div>
+                <div class="box box3"></div>
+                <div class="box box4"></div>
+                <div class="btn" onclick="startLottery()"></div>
+                <div class="box box5"></div>
+                <div class="box box6"></div>
+                <div class="box box7"></div>
+                <div class="box box8"></div>
+                
+            </div>
+            </div>
+
+            <script>
+                var index = 0
+                var arr1 = [
+                './img/box1.jpeg',
+                './img/box2.jpeg',
+                './img/box3.jpeg',
+                './img/box4.jpeg',
+                './img/box5.jpeg',
+                './img/box6.jpeg',
+                './img/box7.png',
+                './img/box8.png'
+                ];
+            
+                var arr2 = [
+                './img/box8.jpeg',
+                './img/box7.jpeg',
+                './img/box6.jpeg',
+                './img/box5.jpeg',
+                './img/box4.jpeg',
+                './img/box3.jpeg',
+                './img/box2.png',
+                './img/box1.png'
+                ];
+                var n = [0,1,2,3,4,5,6,7];
+                var box = document.querySelectorAll('.box');
+                var btn = document.querySelector('.btn');
+                var timer;
+                var span = 100;
+                var count = 0;
+                var random = 0;
+                var award = ['1px',
+                '2px',
+                '3px',
+                '4px',
+                '6px',
+                '7px',
+                '8px'];
+                var isclick = 0;
+                function startLottery(){
+                    if (isclick == 0) {
+                        count = 0;
+                        span = 100;
+                        random = Math.floor(Math.random() * 20 + 30);
+                        time();
+                        isclick = 1;
+                    }
+                }
+                function time(){
+                    timer = setTimeout(function(){
+                        box[n[index]].style.backgroundImage = 'url('+arr1[n[index]]+')'
+                        index++;
+                        if(index==7){
+                            index = 0
+                        }
+                        box[n[index]].style.backgroundImage = 'url('+arr2[n[index]]+')'
+                        count++;
+                        stop()
+                    },span)
+                }
+                function stop(){
+                    if (count > random - 10) {
+                        span += 100;
+                    }
+                    time()
+                    if(count == random){
+                        clearTimeout(timer)
+                        setTimeout(function(){
+                            var randomIndex = Math.floor(Math.random() * award.length);
+                            alert(award[randomIndex]);
+                        },200)
+                        isclick = 0;
+                    }
+                }
+            </script>
+</body>
+</html>
